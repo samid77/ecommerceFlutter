@@ -4,9 +4,12 @@ import 'package:shopapp/screens/cart_screen.dart';
 import 'package:shopapp/widgets/badge.dart';
 import 'package:shopapp/widgets/products_grid.dart';
 import 'package:provider/provider.dart';
+import '../providers/auth.dart';
+
 enum FilterOptions {
   Favorites,
   All,
+  Logout
 }
 
 class ProductsOverviewScreen extends StatefulWidget {
@@ -29,9 +32,11 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
                 if(selectedValue == FilterOptions.Favorites) {
                   // productsContainer.showFavoritesOnly();
                   _showOnlyFavorites = true;
-                } else {
+                } else if(selectedValue == FilterOptions.All) {
                   // productsContainer.showAll();
                   _showOnlyFavorites = false;
+                } else {
+                  Provider.of<Auth>(context, listen: false).logout();
                 }
               });
             },
@@ -39,6 +44,7 @@ class _ProductsOverviewScreenState extends State<ProductsOverviewScreen> {
             itemBuilder: (_) => [
               PopupMenuItem(child: Text('Only Favorites'), value: FilterOptions.Favorites,),
               PopupMenuItem(child: Text('Show All'), value: FilterOptions.All,),
+              PopupMenuItem(child: Text('Logout'), value: FilterOptions.Logout,),
             ],),
           Consumer<CartProvider>(
             builder: (_, cart, ch) => 
