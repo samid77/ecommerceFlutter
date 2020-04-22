@@ -26,11 +26,12 @@ class MyApp extends StatelessWidget {
         builder: (ctx, auth, _) => MaterialApp(
               title: 'MyShop',
               theme: ThemeData(
-                primarySwatch: Colors.purple,
-                accentColor: Colors.deepOrange,
+                primarySwatch: Colors.green,
+                accentColor: Colors.green,
                 fontFamily: 'Lato',
               ),
-              home: auth.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+              // home: auth.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+              home: ProductsOverviewScreen(),
               routes: {
                 ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
                 CartScreen.routeName: (ctx) => CartScreen(),
